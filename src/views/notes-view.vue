@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+import { useNotesStore } from '@/stores/notes'
 import NotesItem from '@/components/notes-item.vue'
 import NotesModal from '@/components/notes-modal.vue';
 
@@ -7,19 +8,7 @@ import NotesModal from '@/components/notes-modal.vue';
 const showModal = ref(false)
 
 // notes
-const notes = ref([])
-const filteredNotes = computed(() => {
-  return notes.value.filter(n => n.text.toLowerCase().includes(filterText.value.toLowerCase()))
-})
-const filterText = ref('')
-
-const addNote = (note) => {
-  notes.value.push(note)
-}
-
-const removeNote = id => {
-  notes.value = notes.value.filter(n => n.id !== id)
-}
+const store = useNotesStore()
 </script>
 
 <template>
@@ -34,16 +23,16 @@ const removeNote = id => {
     </header>
 
     <div class="filter">
-      <input type="text" v-model="filterText">
+      <input type="text" v-model="store.filterText">
     </div>
 
     <ul class="card-list">
       <transition-group name="cards">
-        <notes-item v-for="note in filteredNotes" :key="note.id" :note="note" @remove="removeNote" />
+        <notes-item v-for="note in store.filteredNotes" :key="note.id" :note="note" @remove="store.removeNote" />
       </transition-group>
     </ul>
 
-    <notes-modal @add="addNote" @close="showModal = false" :show="showModal" />
+    <notes-modal @add="store.addNote" @close="showModal = false" :show="showModal" />
   </div>
 </template>
 
