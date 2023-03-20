@@ -29,10 +29,15 @@ const router = createRouter({
       component: () => import('@/views/requests-view.vue')
     },
     {
+      path: '/grid',
+      name: 'grid',
+      component: () => import('@/views/grid-view.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'notFound',
       component: () => import('@/views/404-view.vue')
-    },
+    }
   ]
 })
 

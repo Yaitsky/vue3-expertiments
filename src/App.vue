@@ -4,7 +4,8 @@ const links = [
   { label: 'Counter', path: '/counter' },
   { label: 'Notes', path: '/notes' },
   { label: 'Animations', path: '/animations' },
-  { label: 'Requests', path: '/requests' }
+  { label: 'Requests', path: '/requests' },
+  { label: 'Grid', path: '/grid' }
 ]
 </script>
 
